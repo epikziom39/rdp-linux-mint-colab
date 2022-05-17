@@ -4,7 +4,7 @@ read -p "Paste authtoken here https://dashboard.ngrok.com/get-started/your-autht
 ./ngrok authtoken $CRP
 echo region "us, eu, au, ap, sa, jp, in"
 read -p "region: " region
-nohup ./ngrok tcp -region $region 5900 &>/dev/null &
+nohup ./ngrok tcp -region $region 2137 &>/dev/null &
 mkdir mint
 cd mint
 echo update
@@ -17,4 +17,6 @@ echo making disk
 qemu-img create mint.vdi 100G
 echo Your VNC IP Address:
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'
-sudo qemu-system-x86_64 -cdrom Tiny11 by Harbour of Tech.iso -vnc :0 -hda win11.vdi -smp cores=5 -m 10000M -machine usb=on -device usb-tablet > /dev/null 2>&1
+sudo qemu-system-x86_64 -cdrom Tiny11 by Harbour of Tech.iso -vnc :2137 -hda win11.vdi -smp cores=5 -m 10000M -machine usb=on -device usb-tablet > /dev/null 2>&1
+echo 12 hours
+sleep 43200
